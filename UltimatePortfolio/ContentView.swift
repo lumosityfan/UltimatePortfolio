@@ -25,7 +25,7 @@ struct ContentView: View {
         return allIssues.sorted()
     }
     var body: some View {
-        List {
+        List(selection: $dataController.selectedIssue) {
             ForEach(issues) { issue in
                 IssueRow(issue: issue)
             }
