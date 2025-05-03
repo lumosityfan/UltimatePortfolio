@@ -36,6 +36,12 @@ struct SidebarView: View {
         dataController.save()
     }
     
+    func delete(_ filter: Filter) {
+        guard let tag = filter.tag else { return }
+        dataController.delete(tag)
+        dataController.save()
+    }
+    
     var body: some View {
         List(selection: $dataController.selectedFilter) {
             Section("Smart Filters") {
@@ -56,6 +62,11 @@ struct SidebarView: View {
                                     rename(filter)
                                 } label: {
                                     Label("Rename", systemImage: "pencil")
+                                }
+                                Button(role: .destructive) {
+                                    delete(filter)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
                                 }
                             }
                     }
@@ -86,6 +97,7 @@ struct SidebarView: View {
             Button("Cancel", role: .cancel) {}
             TextField("New name", text: $tagName)
         }
+        .navigationTitle("Filters")
         .sheet(isPresented: $showingAwards, content: AwardsView.init)
     }
     
