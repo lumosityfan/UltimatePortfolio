@@ -26,6 +26,10 @@ extension Issue {
         modificationDate ?? .now
     }
     
+    var issueFormattedCreationDate: String {
+        issueCreationDate.formatted(date: .abbreviated, time: .omitted)
+    }
+    
     var issueTags: [Tag] {
         let result = tags?.allObjects as? [Tag] ?? []
         return result.sorted()

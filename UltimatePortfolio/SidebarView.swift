@@ -55,34 +55,37 @@ struct SidebarView: View {
             Section("Tags") {
                 ForEach(tagFilters) { filter in
                     NavigationLink(value: filter) {
-                        Label(filter.name, systemImage: filter.icon)
-                            .badge(filter.tag?.tagActiveIssues.count ?? 0)
-                            .contextMenu {
-                                Button {
-                                    rename(filter)
-                                } label: {
-                                    Label("Rename", systemImage: "pencil")
+                        Label(LocalizedStringKey(filter.name), systemImage: filter.icon)
+                            .badge(filter.activeIssuesCount)
+                                .contextMenu {
+                                    Button {
+                                        rename(filter)
+                                    } label: {
+                                        Label("Rename", systemImage: "pencil")
+                                    }
+                                    Button(role: .destructive) {
+                                        delete(filter)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
-                                Button(role: .destructive) {
-                                    delete(filter)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }
+                                .accessibilityElement()
+                                .accessibilityLabel(filter.name)
+                                .accessibilityHint("\(filter.activeIssuesCount) issues")
                     }
                 }
                 .onDelete(perform: delete)
             }
         }
         .toolbar {
-            #if DEBUG
+#if DEBUG
             Button {
                 dataController.deleteAll()
                 dataController.createSampleData()
             } label: {
                 Label("ADD SAMPLES", systemImage: "flame")
             }
-            #endif
+#endif
             Button(action: dataController.newTag) {
                 Label("Add tag", systemImage: "plus")
             }
@@ -100,7 +103,6 @@ struct SidebarView: View {
         .navigationTitle("Filters")
         .sheet(isPresented: $showingAwards, content: AwardsView.init)
     }
-    
     func delete(_ offsets: IndexSet) {
         for offset in offsets {
             let item = tags[offset]

@@ -12,6 +12,9 @@ struct Filter: Identifiable, Hashable {
         hasher.combine(id)
     }
     
+    var activeIssuesCount: Int {
+        tag?.tagActiveIssues.count ?? 0
+    }
     static func ==(lhs: Filter, rhs: Filter) -> Bool {
         lhs.id == rhs.id
     }
