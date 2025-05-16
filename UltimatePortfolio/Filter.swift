@@ -25,6 +25,16 @@ struct Filter: Identifiable, Hashable {
     var minModificationDate = Date.distantPast
     var tag: Tag?
     
-    static var all = Filter(id: UUID(), name: "All Issues", icon: "tray")
-    static var recent = Filter(id: UUID(), name: "Recent Issues", icon: "clock", minModificationDate: .now.addingTimeInterval(86400 * -7))
+    static var all = Filter(
+        id: UUID(),
+        name: "All Issues",
+        icon: "tray"
+    )
+    
+    static var recent = Filter(
+        id: UUID(),
+        name: "Recent Issues",
+        icon: "clock",
+        minModificationDate: .now.addingTimeInterval(86400 * -7)
+    )
 }
