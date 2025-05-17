@@ -6,11 +6,29 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		7F48009B2DD90CD700371A69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F92E7D02DAAB4A0002855B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F92E7D72DAAB4A0002855B8;
+			remoteInfo = UltimatePortfolio;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		7F4800972DD90CD700371A69 /* UltimatePortfolioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltimatePortfolioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F92E7D82DAAB4A0002855B8 /* UltimatePortfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimatePortfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7F4800A12DD90DEF00371A69 /* Exceptions for "UltimatePortfolioTests" folder in "UltimatePortfolioTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				UltimatePortfolio.xctestplan,
+			);
+			target = 7F4800962DD90CD700371A69 /* UltimatePortfolioTests */;
+		};
 		7F92E7F02DAAC9D9002855B8 /* Exceptions for "UltimatePortfolio" folder in "UltimatePortfolio" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -21,6 +39,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		7F4800982DD90CD700371A69 /* UltimatePortfolioTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7F4800A12DD90DEF00371A69 /* Exceptions for "UltimatePortfolioTests" folder in "UltimatePortfolioTests" target */,
+			);
+			path = UltimatePortfolioTests;
+			sourceTree = "<group>";
+		};
 		7F92E7DA2DAAB4A0002855B8 /* UltimatePortfolio */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,6 +58,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7F4800942DD90CD700371A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7F92E7D52DAAB4A0002855B8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,6 +78,7 @@
 		7F92E7CF2DAAB4A0002855B8 = {
 			isa = PBXGroup;
 			children = (
+				7F4800982DD90CD700371A69 /* UltimatePortfolioTests */,
 				7F92E7D92DAAB4A0002855B8 /* Products */,
 				7F92E7DA2DAAB4A0002855B8 /* UltimatePortfolio */,
 			);
@@ -54,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7F92E7D82DAAB4A0002855B8 /* UltimatePortfolio.app */,
+				7F4800972DD90CD700371A69 /* UltimatePortfolioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +96,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7F4800962DD90CD700371A69 /* UltimatePortfolioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F48009F2DD90CD700371A69 /* Build configuration list for PBXNativeTarget "UltimatePortfolioTests" */;
+			buildPhases = (
+				7F4800932DD90CD700371A69 /* Sources */,
+				7F4800942DD90CD700371A69 /* Frameworks */,
+				7F4800952DD90CD700371A69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F48009C2DD90CD700371A69 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7F4800982DD90CD700371A69 /* UltimatePortfolioTests */,
+			);
+			name = UltimatePortfolioTests;
+			packageProductDependencies = (
+			);
+			productName = UltimatePortfolioTests;
+			productReference = 7F4800972DD90CD700371A69 /* UltimatePortfolioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7F92E7D72DAAB4A0002855B8 /* UltimatePortfolio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F92E7E72DAAB4A4002855B8 /* Build configuration list for PBXNativeTarget "UltimatePortfolio" */;
@@ -91,9 +149,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					7F4800962DD90CD700371A69 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 7F92E7D72DAAB4A0002855B8;
+					};
 					7F92E7D72DAAB4A0002855B8 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -115,11 +177,19 @@
 			projectRoot = "";
 			targets = (
 				7F92E7D72DAAB4A0002855B8 /* UltimatePortfolio */,
+				7F4800962DD90CD700371A69 /* UltimatePortfolioTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7F4800952DD90CD700371A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7F92E7D62DAAB4A0002855B8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,6 +222,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7F4800932DD90CD700371A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7F92E7D42DAAB4A0002855B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,7 +238,56 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7F48009C2DD90CD700371A69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F92E7D72DAAB4A0002855B8 /* UltimatePortfolio */;
+			targetProxy = 7F48009B2DD90CD700371A69 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7F48009D2DD90CD700371A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82UB3284B2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xie.jeff.UltimatePortfolioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UltimatePortfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UltimatePortfolio";
+			};
+			name = Debug;
+		};
+		7F48009E2DD90CD700371A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 82UB3284B2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xie.jeff.UltimatePortfolioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UltimatePortfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UltimatePortfolio";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		7F92E7E52DAAB4A4002855B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -365,6 +491,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7F48009F2DD90CD700371A69 /* Build configuration list for PBXNativeTarget "UltimatePortfolioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F48009D2DD90CD700371A69 /* Debug */,
+				7F48009E2DD90CD700371A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7F92E7D32DAAB4A0002855B8 /* Build configuration list for PBXProject "UltimatePortfolio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
