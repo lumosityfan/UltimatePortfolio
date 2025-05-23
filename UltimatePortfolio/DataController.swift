@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 enum SortType: String {
     case dateCreated = "creationDate"
@@ -195,6 +196,7 @@ class DataController: ObservableObject {
         // temporary, in-memory database by writing to /dev/null
         // so our data is destroyed after the app finishes running.
         if inMemory {
+            UIView.setAnimationsEnabled(false)
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }
         
@@ -217,9 +219,15 @@ class DataController: ObservableObject {
         )
         
         container.loadPersistentStores { _, error in
-            if let error {
+            if let error = error {
                 fatalError("Fatal error loading store: \(error.localizedDescription)")
             }
+            
+            #if DEBUG
+            if CommandLine.arguments.contains("enable-testing") {
+                self.deleteAll()
+            }
+            #endif
         }
     }
     
