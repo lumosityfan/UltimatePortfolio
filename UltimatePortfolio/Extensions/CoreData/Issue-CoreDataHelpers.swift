@@ -26,20 +26,17 @@ extension Issue {
         modificationDate ?? .now
     }
     
-    var issueFormattedCreationDate: String {
-        issueCreationDate.formatted(date: .abbreviated, time: .omitted)
-    }
-    
     var issueTags: [Tag] {
         let result = tags?.allObjects as? [Tag] ?? []
         return result.sorted()
     }
     
     var issueTagsList: String {
-        guard let tags else { return "No tags" }
+        let noTags = NSLocalizedString("No tags", comment: "The user has not created any tags yet")
+        guard let tags else { return noTags }
         
         if tags.count == 0 {
-            return "No tags"
+            return noTags
         } else {
             return issueTags.map(\.tagName).formatted()
         }
@@ -47,9 +44,9 @@ extension Issue {
     
     var issueStatus: String {
         if completed {
-            return "Closed"
+            return NSLocalizedString("Closed", comment: "This issue has been resolved by the user.")
         } else {
-            return "Open"
+            return NSLocalizedString("Open", comment: "This issue is currently unresolved.")
         }
     }
     

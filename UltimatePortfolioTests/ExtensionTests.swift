@@ -10,7 +10,7 @@ import XCTest
 import Testing
 @testable import UltimatePortfolio
 
-class ExtensionTests: BaseTestCase{
+class ExtensionTests: BaseTestCase {
     func testIssueTitleUnwrap() {
         // Given
         let issue = Issue(context: managedObjectContext)
