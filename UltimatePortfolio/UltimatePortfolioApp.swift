@@ -6,11 +6,19 @@
 //
 
 import SwiftUI
+import CoreSpotlight
 
 @main
 struct UltimatePortfolioApp: App {
     @Environment(\.scenePhase) var scenePhase
     @StateObject var dataController = DataController()
+    
+    func loadSpotlightItem(_ userActivity: NSUserActivity) {
+        if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+            dataController.selectedIssue = dataController.issue(with: uniqueIdentifier)
+            dataController.selectedFilter = .all
+        }
+    }
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
@@ -27,6 +35,7 @@ struct UltimatePortfolioApp: App {
                     dataController.save()
                 }
             }
+            .onContinueUserActivity(CSSearchableItemActionType, perform: loadSpotlightItem)
         }
     }
 }
