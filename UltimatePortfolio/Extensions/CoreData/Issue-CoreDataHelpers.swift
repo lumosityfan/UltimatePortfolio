@@ -26,6 +26,11 @@ extension Issue {
         modificationDate ?? .now
     }
     
+    var issueReminderTime: Date {
+        get { reminderTime ?? .now }
+        set { reminderTime = newValue }
+    }
+    
     var issueTags: [Tag] {
         let result = tags?.allObjects as? [Tag] ?? []
         return result.sorted()
