@@ -7,6 +7,7 @@
 
 import CoreData
 import SwiftUI
+import StoreKit
 
 enum SortType: String {
     case dateCreated = "creationDate"
@@ -20,6 +21,9 @@ enum Status {
 /// An environment singleton responsible for managing our Core Data stack, including handling saving,
 /// counting fetch requests, tracking awards, and dealing with sample data.
 class DataController: ObservableObject {
+    /// The StoreKit products we've loaded for  the store.
+    @Published var products = [Product]()
+    
     @Published var filterEnabled = false
     @Published var filterPriority = -1
     @Published var filterStatus = Status.all
@@ -30,7 +34,11 @@ class DataController: ObservableObject {
     @Published var selectedFilter: Filter? = Filter.all
     @Published var filterTokens = [Tag]()
     private var saveTask: Task<Void, Error>?
+    private var storeTask: Task<Void, Never>?
     var spotlightDelegate: NSCoreDataCoreSpotlightDelegate?
+    
+    /// The UserDefaults suit where we're saving user data.
+    let defaults: UserDefaults
     
     /// The lone CloudKit container used to store all our data.
     let container: NSPersistentCloudKitContainer
@@ -80,11 +88,24 @@ class DataController: ObservableObject {
         selectedIssue = issue
     }
     
-    func newTag() {
+    func newTag() -> Bool {
+        var shouldCreate = fullVersionUnlocked
+        
+        if shouldCreate == false {
+            // check how many tags we currently have
+            shouldCreate = count(for: Tag.fetchRequest()) < 3
+        }
+        
+        guard shouldCreate else {
+            return false
+        }
+        
         let tag = Tag(context: container.viewContext)
         tag.id = UUID()
         tag.name = NSLocalizedString("New tag", comment: "Create a new tag")
         save()
+        
+        return true
     }
     
     func count<T>(for fetchRequest: NSFetchRequest<T>) -> Int {
@@ -109,6 +130,8 @@ class DataController: ObservableObject {
             let fetchRequest = Tag.fetchRequest()
             let awardCount = count(for: fetchRequest)
             return awardCount >= award.value
+        case "unlock":
+            return fullVersionUnlocked
         default:
             // an unknown award criterion; this should never be allowed
             // fatalError("Unknown award criterion: \(award.criterion)")
@@ -190,8 +213,14 @@ class DataController: ObservableObject {
     /// Initializes a data controller, either in memory (for temporary use such as testing and previewing),
     /// or on permanent storage (for use in regular app runs.) Defaults to permanent storage.
     /// - Parameter inMemory: Whether to store this data in temporary or permanent storage.
-    init(inMemory: Bool = false) {
+    /// - Parameter defaults: The UserDefaults suite where user data should be stored
+    init(inMemory: Bool = false, defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         container = NSPersistentCloudKitContainer(name: "Main", managedObjectModel: Self.model)
+        
+        storeTask = Task {
+            await monitorTransactions()
+        }
         
         // For testing and previewing purposes, we create a
         // temporary, in-memory database by writing to /dev/null
