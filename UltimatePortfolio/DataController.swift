@@ -193,15 +193,6 @@ class DataController: ObservableObject {
         return allIssues
     }
     
-    func queueSave() {
-        saveTask?.cancel()
-        
-        saveTask = Task { @MainActor in
-            try await Task.sleep(for: .seconds(3))
-            save()
-        }
-    }
-    
     func missingTags(from issue: Issue) -> [Tag] {
         let request = Tag.fetchRequest()
         let allTags = (try? container.viewContext.fetch(request)) ?? []
