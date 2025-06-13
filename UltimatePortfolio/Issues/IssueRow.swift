@@ -55,4 +55,5 @@ struct IssueRow: View {
 
 #Preview {
     IssueRow(issue: .example)
+        .environmentObject(DataController(inMemory: true))
 }

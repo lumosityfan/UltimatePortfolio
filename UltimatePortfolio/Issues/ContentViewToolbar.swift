@@ -67,4 +67,5 @@ struct ContentViewToolbar: View {
 
 #Preview {
     ContentViewToolbar()
+        .environmentObject(DataController(inMemory: true))
 }

@@ -78,7 +78,7 @@ struct IssueViewToolbar: View {
             Section("Tags") {
                 TagsMenuView(issue: issue)
             }
-            Button("Copy Issue Tittle", systemImage: "doc.on.doc",  action: copyToClipboard)
+            Button("Copy Issue Tittle", systemImage: "doc.on.doc", action: copyToClipboard)
             
             Button(action: toggleCompleted) {
                 Label(openCloseButtonText, systemImage: "bubble.left.and.exclamationmark.bubble.right")
@@ -101,4 +101,5 @@ struct IssueViewToolbar: View {
 
 #Preview {
     IssueViewToolbar(issue: Issue.example)
+        .environmentObject(DataController(inMemory: true))
 }

@@ -116,16 +116,13 @@ struct IssueView: View {
         } message: {
             Text("There was a problem setting your notifications. Please check you have notifications enabled.")
         }
-        .onChange(of: issue.reminderEnabled) { _ in
-            updateReminder()
-        }
-        .onChange(of: issue.reminderTime) { _ in
-            updateReminder()
-        }
+        .onChange(of: issue.reminderEnabled, updateReminder)
+        .onChange(of: issue.reminderTime, updateReminder)
         .formStyle(.grouped)
     }
 }
 
 #Preview {
     IssueView(issue: .example)
+        .environmentObject(DataController(inMemory: true))
 }

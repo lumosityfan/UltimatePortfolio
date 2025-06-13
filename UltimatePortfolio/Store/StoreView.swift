@@ -9,9 +9,7 @@ import SwiftUI
 import StoreKit
 
 struct StoreView: View {
-    #if os(visionOS)
     @Environment(\.purchase) var purchaseAction
-    #endif
     
     enum LoadState {
         case loading, loaded, error
@@ -35,15 +33,11 @@ struct StoreView: View {
         }
         
         Task { @MainActor in
-            #if os(visionOS)
             let result = try await purchaseAction(product)
             
             if case let .success(validation) = result {
                 try await dataController.finalize(validation.payloadValue)
             }
-            #else
-            try await dataController.purchase(product)
-            #endif
         }
     }
     
@@ -152,9 +146,7 @@ struct StoreView: View {
                 .padding(.top, 20)
             }
         }
-        .onChange(of: dataController.fullVersionUnlocked) { _ in
-            checkForPurchase()
-        }
+        .onChange(of: dataController.fullVersionUnlocked, checkForPurchase) 
         .task {
             await load()
         }
@@ -171,4 +163,5 @@ struct StoreView: View {
 
 #Preview {
     StoreView()
+        .environmentObject(DataController(inMemory: true))
 }

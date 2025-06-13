@@ -263,11 +263,7 @@ class DataController: ObservableObject {
                 #endif
             }
             
-            #if DEBUG
-            if CommandLine.arguments.contains("enable-testing") {
-                self?.deleteAll()
-            }
-            #endif
+            self?.checkForTestEnvironment()
         }
     }
     
