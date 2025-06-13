@@ -56,7 +56,7 @@ struct IssueView: View {
                     Text("Medium").tag(Int16(1))
                     Text("High").tag(Int16(2))
                 }
-                
+                #if !os(watchOS)
                 Menu {
                     TagsMenuView(issue: issue)
                 } label: {
@@ -65,6 +65,7 @@ struct IssueView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .animation(nil, value: issue.issueTagsList)
                 }
+                #endif
             }
             
             Section {
@@ -108,7 +109,7 @@ struct IssueView: View {
             SettingsLink {
                 Text("Check Settings")
             }
-            #else
+            #elseif os(iOS)
             Button("Check Settings", action: showAppSettings)
             #endif
             Button("Cancel", role: .cancel) { }

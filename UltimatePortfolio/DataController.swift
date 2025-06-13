@@ -35,7 +35,9 @@ class DataController: ObservableObject {
     @Published var filterTokens = [Tag]()
     private var saveTask: Task<Void, Error>?
     private var storeTask: Task<Void, Never>?
+    #if !os(watchOS)
     var spotlightDelegate: NSCoreDataCoreSpotlightDelegate?
+    #endif
     
     /// The UserDefaults suit where we're saving user data.
     let defaults: UserDefaults
@@ -258,6 +260,7 @@ class DataController: ObservableObject {
             if let description = self?.container.persistentStoreDescriptions.first {
                 description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
                 
+                #if !os(watchOS)
                 if let coordinator = self?.container.persistentStoreCoordinator {
                     self?.spotlightDelegate = NSCoreDataCoreSpotlightDelegate(
                         forStoreWith: description,
@@ -266,6 +269,7 @@ class DataController: ObservableObject {
                     
                     self?.spotlightDelegate?.startSpotlightIndexing()
                 }
+                #endif
             }
             
             #if DEBUG

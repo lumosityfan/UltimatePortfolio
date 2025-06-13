@@ -12,6 +12,7 @@ struct TagsMenuView: View {
     @ObservedObject var issue: Issue
     
     var body: some View {
+        #if !os(watchOS)
         // show selected tags first
         ForEach(issue.issueTags) { tag in
             Button {
@@ -34,6 +35,7 @@ struct TagsMenuView: View {
                 }
             }
         }
+        #endif
     }
 }
 
