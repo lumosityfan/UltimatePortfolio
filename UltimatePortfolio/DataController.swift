@@ -226,7 +226,9 @@ class DataController: ObservableObject {
         // temporary, in-memory database by writing to /dev/null
         // so our data is destroyed after the app finishes running.
         if inMemory {
+            #if os(iOS)
             UIView.setAnimationsEnabled(false)
+            #endif
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }
         

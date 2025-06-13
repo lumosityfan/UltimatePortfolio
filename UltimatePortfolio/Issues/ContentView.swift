@@ -46,6 +46,7 @@ struct ContentView: View {
         .toolbar(content: ContentViewToolbar.init)
         .onAppear(perform: askForReview)
         .onOpenURL(perform: openURL)
+        .macFrame(minWidth: 200)
     }
 }
 

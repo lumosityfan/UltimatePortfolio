@@ -17,6 +17,14 @@ struct IssueViewToolbar: View {
         issue.completed ? "Re-open Issue" : "Close Issue"
     }
     
+    func copyToClipboard() {
+        #if os(iOS)
+        UIPasteBoard.general.string = issue.title
+        #else
+        NSPasteboard.general.prepareForNewContents()
+        NSPasteboard.general.setString(issue.issueTitle, forType: .string)
+        #endif
+    }
     func toggleCompleted() {
         issue.completed.toggle()
         dataController.save()
@@ -62,11 +70,7 @@ struct IssueViewToolbar: View {
             Section("Tags") {
                 TagsMenuView(issue: issue)
             }
-            Button {
-                UIPasteboard.general.string = issue.title
-            } label: {
-                Label("Copy Issue Title", systemImage: "doc.on.doc")
-            }
+            Button("Copy Issue Tittle", systemImage: "doc.on.doc",  action: copyToClipboard)
             
             Button(action: toggleCompleted) {
                 Label(openCloseButtonText, systemImage: "bubble.left.and.exclamationmark.bubble.right")
